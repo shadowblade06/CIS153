@@ -1,14 +1,14 @@
 package finals;
 
-import java.awt.FlowLayout;
+import java.awt.FlowLayout; // This is used to format the labels and text fields and buttons
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.PriorityQueue;
+import java.awt.event.ActionListener; // This is used to listen for a button press then runs code to change parts of the GUI
+import java.util.PriorityQueue; // This is the priority queue for the tasks before they are added to taskManager
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JButton; // JButtons allow the GUI to be interactive
+import javax.swing.JFrame; // This is the main frame import
+import javax.swing.JLabel; // JLabels allow for text to tell the user what the fields are for
+import javax.swing.JTextField; // JTextFields allow for the user to enter inputs for the GUI to read
 
 public class Frame extends JFrame implements ActionListener {
 	PriorityQueue<Task> queue = new PriorityQueue<Task>();
@@ -23,9 +23,11 @@ public class Frame extends JFrame implements ActionListener {
 	private JButton print;
 	
 	public Frame() {
+		// adding the title and the layout to the frame
 		setTitle("Task GUI");
 		setLayout(new FlowLayout());
 		
+		// initializing each component
 		taskLabel = new JLabel("Enter task name:");
 		priorityLabel = new JLabel("Enter priority level:");
 		taskListLabel = new JLabel("Task List:");
@@ -47,6 +49,7 @@ public class Frame extends JFrame implements ActionListener {
 		print = new JButton("Print");
 		print.addActionListener(this);
 		
+		// adding all the components
 		add(taskLabel);
 		add(taskField);
 		add(priorityLabel);
@@ -61,12 +64,12 @@ public class Frame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		
-		if (source == submit) {
+		if (source == submit) { // creates a new task then adds it to the queue with the inputs from the gui
 			Task newTask = new Task(taskField.getText(), Integer.parseInt(priorityField.getText()));
 			queue.add(newTask);
 			taskField.setText("Enter a string");
 			priorityField.setText("Enter a int");
-		} else if (source == print) {
+		} else if (source == print) { // adds the tasks in the queue to the task manager then prints the list to the field
 			for (Task task : queue) {
 			    taskManager.add(task);
 			}
